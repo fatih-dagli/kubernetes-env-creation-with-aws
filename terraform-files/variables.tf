@@ -41,4 +41,3 @@ variable "availability_zone" {
 variable "instance_count" {
      default = "2"
 }
-
