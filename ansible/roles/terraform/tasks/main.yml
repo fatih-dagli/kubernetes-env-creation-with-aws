@@ -1,0 +1,5 @@
+- name: Basic deploy of a service
+  community.general.terraform:
+    project_path: "/home/ubuntu/terraform-files/"
+    force_init: true
+    state: present

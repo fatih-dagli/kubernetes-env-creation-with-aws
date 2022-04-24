@@ -1,0 +1,37 @@
+---
+- name: Build Infra
+  hosts: terraform
+  tags: install-terraform
+  vars: 
+    project_path: "/home/ubuntu/terraform-files/"
+  tasks:
+  - import_role:
+      name: terraform
+
+
+
+      #- name: Prepare Kubernetes cluster with kubespray
+  #  hosts: localhost
+  #  tags: prepare-k8-cluster
+  #  vars:
+          #    cluster_name: mycluster
+    #    kubespray_dir: "../"
+    #  tasks:
+          #  - import_role:
+          #      name: kubespray
+
+      #- name: Install Docker
+  #  hosts: node3
+  #  tags: node3-apps
+  #  become: true
+  #  tasks:
+          #  - import_role:
+          #      name: docker
+
+      #- name: Install Jenkins
+      #  hosts: node3
+      #  become: true
+      #  tags: node3-apps
+      #  tasks:
+      #  - import_role:
+      #      name: jenkins

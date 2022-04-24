@@ -1,0 +1,1 @@
+terraform ansible_host=172.31.27.69 ansible_user=ubuntu
