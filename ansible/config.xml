@@ -1,0 +1,18 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1180.v04c4e75dce43">
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2687.v3f09155513c1">
+    <script>node {
+    def mvnHome
+    stage(&apos;Clone Project&apos;) {
+          git branch: &quot;main&quot;,
+              url: &apos;https://github.com/fatih-dagli/kubernetes-env-creation-with-aws.git&apos;
+    }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>

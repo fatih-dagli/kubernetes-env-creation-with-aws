@@ -79,7 +79,7 @@ resource "null_resource" "local-command-1" {
   }
 
   provisioner "local-exec" {
-    command = "echo 'k8s-master ansible_host=${aws_instance.myClusterInstance.0.private_ip} ansible_user=root' >> /home/ubuntu/ansible/hosts "
+    command = "echo 'k8s-master ansible_host=${aws_instance.myClusterInstance.0.private_ip} ansible_user=root' >> ${var.project_path}/ansible/hosts "
   }
 }
 
@@ -89,7 +89,7 @@ resource "null_resource" "local-command-2" {
   }
 
   provisioner "local-exec" {
-    command = "echo 'k8s-node ansible_host=${aws_instance.myClusterInstance.1.private_ip} ansible_user=root' >> /home/ubuntu/ansible/hosts "
+    command = "echo 'k8s-node ansible_host=${aws_instance.myClusterInstance.1.private_ip} ansible_user=root' >> ${var.project_path}/ansible/hosts "
   }
 }
 
@@ -105,7 +105,7 @@ resource "null_resource" "remote-command-1" {
     agent       = "false"
     type        = "ssh"
     user        = "ubuntu"
-    private_key = file(pathexpand("/home/ubuntu/terraform-files/terraform.pem"))
+    private_key = file(pathexpand("${var.project_path}/terraform-files/terraform.pem"))
   }
 
   provisioner "remote-exec" {

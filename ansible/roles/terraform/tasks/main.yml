@@ -1,5 +1,5 @@
 - name: Basic deploy of a service
   community.general.terraform:
-    project_path: "/home/ubuntu/terraform-files/"
+    project_path: "{{ project_path }}"
     force_init: true
     state: present

@@ -41,3 +41,7 @@ variable "availability_zone" {
 variable "instance_count" {
      default = "2"
 }
+
+variable "project_path" {
+     default = "/home/ubuntu"
+}

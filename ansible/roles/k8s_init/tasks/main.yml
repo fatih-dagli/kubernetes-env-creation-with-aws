@@ -29,7 +29,7 @@
  
  - name: Copy file with owner and permissions
    ansible.builtin.copy:
-     src: /home/ubuntu/ansible/daemon.json
+     src: "{{ daemon_json_path }}"
      dest: /etc/docker/daemon.json
      owner: root
      group: root

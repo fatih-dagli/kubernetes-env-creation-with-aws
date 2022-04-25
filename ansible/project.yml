@@ -12,6 +12,8 @@
 - name: Prepare Kubernetes cluster
   hosts: k8s-all
   tags: prepare-k8s-all
+  vars:
+    daemon_json_path: "/home/ubuntu/ansible/daemon.json"
   tasks:
   - import_role:
       name: k8s_init
@@ -37,6 +39,7 @@
   hosts: terraform
   vars:
     jenkins_password: "Operation123"
+    project_path: "/home/ubuntu"
     jenkins_plugins:
       git:
         enabled: yes
@@ -44,6 +47,167 @@
         version: "1.4.9"
         pinned: no
         enabled: yes
+      pipeline:
+        version: "2.7"
+        enabled: yes
+      pipeline-job:
+        enable: yes
+      ace-editor:
+        enable: yes
+      ant:
+        enable: yes
+      antisamy-markup-formatter:
+        enable: yes
+      authentication-tokens:
+        enable: yes
+      bouncycastle-api:
+        enable: yes
+      branch-api:
+        enable: yes
+      build-timestamp:
+        enable: yes
+      cloudbees-folder:
+        enable: yes
+      copyartifact:
+        enable: yes
+      credentials:
+        enable: yes
+      credentials-binding:
+        enable: yes
+      display-url-api:
+        enable: yes
+      docker-build-step:
+        enable: yes
+      docker-commons:
+        enable: yes
+      durable-task:
+        enable: yes
+      email-ext:
+        enable: yes
+      envinject:
+        enable: yes
+      external-monitor-job:
+        enable: yes
+      git:
+        enable: yes
+      git-client:
+        enable: yes
+      git-server:
+        enable: yes
+      github:
+        enable: yes
+      github-api:
+        enable: yes
+      github-branch-source:
+        enable: yes
+      github-organization-folder:
+        enable: yes
+      golang:
+        enable: yes
+      gradle:
+        enable: yes
+      greenballs:
+        enable: yes
+      handlebars:
+        enable: yes
+      icon-shim:
+        enable: yes
+      jackson2-api:
+        enable: yes
+      javadoc:
+        enable: yes
+      jquery-detached:
+        enable: yes
+      junit:
+        enable: yes
+      mapdb-api:
+        enable: yes
+      matrix-auth:
+        enable: yes
+      matrix-project:
+        enable: yes
+      maven-plugin:
+        enable: yes
+      momentjs:
+        enable: yes
+      nodejs:
+        enable: yes
+      pam-auth:
+        enable: yes
+      pipeline-build-step:
+        enable: yes
+      pipeline-graph-analysis:
+        enable: yes
+      pipeline-input-step:
+        enable: yes
+      pipeline-milestone-step:
+        enable: yes
+      pipeline-rest-api:
+        enable: yes
+      pipeline-stage-step:
+        enable: yes
+      pipeline-stage-view:
+        enable: yes
+      plain-credentials:
+        enable: yes
+      postbuildscript:
+        enable: yes
+      publish-over-ssh:
+        enable: yes
+      resource-disposer:
+        enable: yes
+      robot:
+        enable: yes
+      scm-api:
+        enable: yes
+      scm-sync-configuration:
+        enable: yes
+      script-security:
+        enable: yes
+      ssh:
+        enable: yes
+      ssh-agent:
+        enable: yes
+      ssh-credentials:
+        enable: yes
+      ssh-slaves:
+        enable: yes
+      structs:
+        enable: yes
+      subversion:
+        enable: yes
+      timestamper:
+        enable: yes
+      token-macro:
+        enable: yes
+      workflow-aggregator:
+        enable: yes
+      workflow-api:
+        enable: yes
+      workflow-basic-steps:
+        enable: yes
+      workflow-cps:
+        enable: yes
+      workflow-cps-global-lib:
+        enable: yes
+      workflow-durable-task-step:
+        enable: yes
+      workflow-job:
+        enable: yes
+      workflow-multibranch:
+        enable: yes
+      workflow-scm-step:
+        enable: yes
+      workflow-step-api:
+        enable: yes
+      workflow-support:
+        enable: yes
+      ws-cleanup:
+        enable: yes
+      xvfb:
+        enable: yes
+      zentimestamp:
+        enable: yes
   tags: install-jenkins
   tasks:
   - import_role:
