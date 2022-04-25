@@ -1,0 +1,99 @@
+ - name: Update and upgrade apt packages
+   apt:
+     update_cache: yes
+     cache_valid_time: 86400 
+ 
+ - name: install Docker
+   apt:
+     name: docker.io
+     state: present
+     update_cache: true
+ 
+ - name: Enable Docker service, and start it.
+   systemd: 
+     name: docker
+     state: restarted
+     enabled: yes
+     daemon-reload: yes
+ 
+ - name: add Kubernetes apt-key
+   apt_key:
+     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+     state: present
+ 
+ - name: add Kubernetes' APT repository
+   apt_repository:
+     repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+     state: present
+     filename: 'kubernetes'
+ 
+ - name: Copy file with owner and permissions
+   ansible.builtin.copy:
+     src: /home/ubuntu/ansible/daemon.json
+     dest: /etc/docker/daemon.json
+     owner: root
+     group: root
+     mode: '0644'
+ 
+ - name: Enable docker service, and start it.
+   systemd:
+     name: docker
+     state: restarted
+     enabled: yes
+     daemon-reload: yes
+
+ - name: install kubelet
+   apt:
+     name: kubelet
+     state: present
+     update_cache: true
+ 
+ - name: install kubeadm
+   apt:
+     name: kubeadm
+     state: present
+ 
+ - name: install kubectl
+   apt:
+     name: kubectl
+     state: present
+ 
+ - name: install net-tools
+   apt:
+     name: net-tools
+     state: present
+ 
+ - name: Hold kubeadm
+   dpkg_selections:
+     name: kubeadm
+     selection: hold
+ 
+ - name: Hold kubectl
+   dpkg_selections:
+     name: kubectl
+     selection: hold
+ 
+ - name: Hold kubelet
+   dpkg_selections:
+     name: kubelet
+     selection: hold
+     
+ - name: remove swap
+   shell: "swapoff -a"
+ 
+ - name: Enable kubelet service, and start it.
+   systemd:
+     name: kubelet
+     state: restarted
+     enabled: yes
+     daemon-reload: yes
+
+ - name: kubeadm init phase kubelet-start
+   shell: "kubeadm init phase kubelet-start"   
+  
+ - name: Enable kubelet service, and start it.
+   systemd:
+     name: kubelet
+     state: restarted
+     enabled: yes
+     daemon-reload: yes

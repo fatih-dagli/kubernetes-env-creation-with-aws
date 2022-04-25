@@ -34,7 +34,6 @@ provider "aws" {
 #  }
 #}
 
-
 # Create Elastic IP address
 #resource "aws_eip" "myElasticIP" {
 #  vpc      = true
@@ -44,12 +43,12 @@ provider "aws" {
 #  }
 #}
 
-
 resource "aws_instance" "myClusterInstance" {
   count           = var.instance_count
   ami             = var.ami_id
   key_name        = var.key_name
   instance_type   = var.instance_type
+  availability_zone     = var.availability_zone
   security_groups = [var.security_group]
   tags = {
     Name  = element(var.instance_tags, count.index)

@@ -25,7 +25,7 @@ variable "tag_name" {
 
 variable "instance_tags" {
   type = list
-  default = ["Terraform-1", "Terraform-2"]
+  default = ["k8s-master", "k8s-node"]
 }
 
 variable "ami_id" { 

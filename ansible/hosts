@@ -1,2 +1,4 @@
-terraform ansible_host=172.31.27.69 ansible_user=ubuntu
-#kubernetes master and nodes entry will be added automaticly after terraform created ec2 machines
+terraform ansible_host=172.31.27.69 ansible_user=root
+
+#kubernetes master and node ips will be added automaticly after created by terraform
+[k8s-all]

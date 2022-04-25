@@ -1,0 +1,5 @@
+ - name: Copy the join command to server location
+   copy: src=/tmp/kubernetes_join_command dest=/tmp/kubernetes_join_command mode=0777
+ 
+ - name: Join the node to cluster
+   command: sh /tmp/kubernetes_join_command

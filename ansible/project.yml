@@ -7,3 +7,27 @@
   tasks:
   - import_role:
       name: terraform
+
+
+- name: Prepare Kubernetes cluster 
+  hosts: k8s-all
+  tags: prepare-k8s-all
+  tasks:
+  - import_role:
+      name: k8s_init
+
+
+- name: Initialize Kubernetes master
+  hosts: k8s-master
+  tags: initialize-k8s-master
+  tasks:
+  - import_role:
+      name: k8s_master
+
+
+- name: Initialize Kubernetes node
+  hosts: k8s-node
+  tags: initialize-k8s-node
+  tasks:
+  - import_role:
+      name: k8s_node
