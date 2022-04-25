@@ -83,7 +83,6 @@ resource "null_resource" "local-command-1" {
   }
 }
 
-
 resource "null_resource" "local-command-2" {
   triggers = {
     cluster_instance_ids = "${join(",", aws_instance.myClusterInstance.*.id)}"
@@ -93,7 +92,6 @@ resource "null_resource" "local-command-2" {
     command = "echo 'k8s-node ansible_host=${aws_instance.myClusterInstance.1.private_ip} ansible_user=root' >> /home/ubuntu/ansible/hosts "
   }
 }
-
 
 resource "null_resource" "remote-command-1" {
   count           = var.instance_count

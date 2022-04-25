@@ -2,14 +2,14 @@
 - name: Build Infra
   hosts: terraform
   tags: install-terraform
-  vars: 
+  vars:
     project_path: "/home/ubuntu/terraform-files/"
   tasks:
   - import_role:
       name: terraform
 
 
-- name: Prepare Kubernetes cluster 
+- name: Prepare Kubernetes cluster
   hosts: k8s-all
   tags: prepare-k8s-all
   tasks:
@@ -31,3 +31,20 @@
   tasks:
   - import_role:
       name: k8s_node
+
+
+- name: Initialize Jenkins
+  hosts: terraform
+  vars:
+    jenkins_password: "Operation123"
+    jenkins_plugins:
+      git:
+        enabled: yes
+      build-pipeline-plugin:
+        version: "1.4.9"
+        pinned: no
+        enabled: yes
+  tags: install-jenkins
+  tasks:
+  - import_role:
+      name: jenkins

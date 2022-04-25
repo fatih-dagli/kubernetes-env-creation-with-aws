@@ -1,0 +1,62 @@
+    - name: ensure the jenkins apt repository key is installed
+      apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
+      become: yes
+
+    - name: ensure the repository is configured
+      apt_repository: repo='deb https://pkg.jenkins.io/debian-stable binary/' state=present
+      become: yes
+
+    - name: ensure java is installed
+      apt: name=openjdk-11-jdk update_cache=yes
+      become: yes
+
+    - name: ensure jenkins is installed
+      apt: name=jenkins update_cache=yes
+      become: yes
+
+    - name: ensure jenkins is running
+      service: name=jenkins state=started
+
+    - name: read admin pwd
+      shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+      register: adminpwd
+
+    - name: unlock and add admin user
+      jenkins_script:
+       script: |
+        import jenkins.model.*
+        import hudson.security.*
+        def instance = Jenkins.getInstance()
+        def hudsonRealm = new HudsonPrivateSecurityRealm(false)
+        hudsonRealm.createAccount('jenkins', '${user_pwd}')
+        instance.setSecurityRealm(hudsonRealm)
+        def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
+        strategy.setAllowAnonymousRead(false)
+        instance.setAuthorizationStrategy(strategy)
+        instance.save()
+       args:
+        user_pwd: "{{ jenkins_password }}"
+       user: admin
+       password: "{{ adminpwd.stdout }}"
+
+    - name: complete setup wizard
+      jenkins_script:
+       script: |
+        import static jenkins.model.Jenkins.instance as jenkins
+        import jenkins.install.InstallState
+        if (!jenkins.installState.isSetupComplete()) {
+          InstallState.INITIAL_SETUP_COMPLETED.initializeState()
+        }
+       user: admin
+       password: "{{ adminpwd.stdout }}"
+
+    - name: install plugins
+      jenkins_plugin:
+       name: "{{ item }}"
+       state: latest
+       url_username: admin
+       url_password: "{{ adminpwd.stdout }}"
+      with_items: "{{ jenkins_plugins }}"
+
+    - name: restart jenkins
+      service: name=jenkins state=restarted
