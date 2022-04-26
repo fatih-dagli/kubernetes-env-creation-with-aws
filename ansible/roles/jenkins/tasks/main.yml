@@ -1,3 +1,10 @@
+    - name: change master ip in jenkins job
+      shell: cat {{ project_path }}/ansible/hosts | grep k8s-master | awk '{ print $2 }' | cut -d '=' -f2
+      register: IP_ADDR_OF_MASTER
+
+    - name: change master ip in jenkins job
+      shell: sed -i "s/xxx.xxx.xxx.xxx/{{ IP_ADDR_OF_MASTER.stdout }}/g" {{ project_path }}/ansible/config.xml
+
     - name: ensure the jenkins apt repository key is installed
       apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
       become: yes
@@ -64,7 +71,7 @@
     - name: Create a jenkins job using basic authentication
       community.general.jenkins_job:
         config: "{{ lookup('file', '{{ project_path }}/ansible/config.xml') }}"
-        name: initail-deploy
+        name: initial-deploy
         password: "{{ jenkins_password }}"
         url: http://{{ ansible_host }}:8080
         user: jenkins
@@ -73,7 +80,7 @@
       shell: usermod -aG docker jenkins
 
     - name: run jenkins with root user
-      shell: echo 'jenkins    ALL = NOPASSWD: /usr/bin/docker' >> /etc/sudouers
+      shell: "echo 'jenkins    ALL = NOPASSWD: /usr/bin/docker' >> /etc/sudouers"
 
     - name: restart jenkins
       service: name=jenkins state=restarted

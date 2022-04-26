@@ -22,6 +22,8 @@
 - name: Initialize Kubernetes master
   hosts: k8s-master
   tags: initialize-k8s-master
+  vars:
+    project_path: "/home/ubuntu"
   tasks:
   - import_role:
       name: k8s_master
