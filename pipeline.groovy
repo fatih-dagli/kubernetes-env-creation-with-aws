@@ -8,7 +8,7 @@ node {
         dir("/var/lib/jenkins/workspace/initial-deploy/kubernetes") {
             sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 553882164358.dkr.ecr.us-east-1.amazonaws.com"
             sh "docker build -t python:built ."
-            sh "docker tag 553882164358.dkr.ecr.us-east-1.amazonaws.com/python:latest"
+            sh "docker tag python:built 553882164358.dkr.ecr.us-east-1.amazonaws.com/python:latest"
             sh "docker push 553882164358.dkr.ecr.us-east-1.amazonaws.com/python:latest"
         }
     }

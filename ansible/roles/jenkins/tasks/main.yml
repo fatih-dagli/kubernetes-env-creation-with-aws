@@ -68,3 +68,12 @@
         password: "{{ jenkins_password }}"
         url: http://{{ ansible_host }}:8080
         user: jenkins
+
+    - name: give docker permission to jenkins user
+      shell: usermod -aG docker jenkins
+
+    - name: run jenkins with root user
+      shell: echo 'jenkins    ALL = NOPASSWD: /usr/bin/docker' >> /etc/sudouers
+
+    - name: restart jenkins
+      service: name=jenkins state=restarted
