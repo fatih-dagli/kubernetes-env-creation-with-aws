@@ -15,15 +15,15 @@
         dir(&quot;/var/lib/jenkins/workspace/initial-deploy/kubernetes&quot;) {
             sh &quot;aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 553882164358.dkr.ecr.us-east-1.amazonaws.com&quot;
             sh &quot;docker build -t python:built .&quot;
-            sh &quot;docker tag 553882164358.dkr.ecr.us-east-1.amazonaws.com/python:latest&quot;
+            sh &quot;docker tag python:built 553882164358.dkr.ecr.us-east-1.amazonaws.com/python:latest&quot;
             sh &quot;docker push 553882164358.dkr.ecr.us-east-1.amazonaws.com/python:latest&quot;
         }
     }
 
     stage(&apos;send yaml files &apos;) {
         dir(&quot;/var/lib/jenkins/workspace/initial-deploy/kubernetes&quot;) {
-            sh &quot;sshpass -p &apos;Operation123&apos; scp mysql.yml -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx:/ &quot;
-            sh &quot;sshpass -p &apos;Operation123&apos; scp python.yml -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx:/ &quot;
+            sh &quot;sshpass -p &apos;Operation123&apos; scp -o StrictHostKeyChecking=no mysql.yml root@xxx.xxx.xxx.xxx:/ &quot;
+            sh &quot;sshpass -p &apos;Operation123&apos; scp -o StrictHostKeyChecking=no python.yml root@xxx.xxx.xxx.xxx:/ &quot;
         }
     }
 

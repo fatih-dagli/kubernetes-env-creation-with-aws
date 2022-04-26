@@ -15,8 +15,8 @@ node {
 
     stage('send yaml files ') {
         dir("/var/lib/jenkins/workspace/initial-deploy/kubernetes") {
-            sh "sshpass -p 'Operation123' scp mysql.yml -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx:/ "
-            sh "sshpass -p 'Operation123' scp python.yml -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx:/ "
+            sh "sshpass -p 'Operation123' scp -o StrictHostKeyChecking=no mysql.yml root@xxx.xxx.xxx.xxx:/ "
+            sh "sshpass -p 'Operation123' scp -o StrictHostKeyChecking=no python.yml root@xxx.xxx.xxx.xxx:/ "
         }
     }
 
