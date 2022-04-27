@@ -13,11 +13,12 @@
 
     stage(&apos;Build Project&apos;) {
         dir(&quot;/var/lib/jenkins/workspace/initial-deploy/kubernetes&quot;) {
-            sh &quot;aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin aaaaaaaaaaaaa.dkr.ecr.us-east-1.amazonaws.com&quot;
+            sh &quot;aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin aaaaaaaaaaaaa.dkr.ecr.<region>.amazonaws.com&quot;
             sh &quot;docker build -t python:built .&quot;
-            sh &quot;docker tag python:built aaaaaaaaaaaaa.dkr.ecr.us-east-1.amazonaws.com/python:latest&quot;
-            sh &quot;docker push aaaaaaaaaaaaa.dkr.ecr.us-east-1.amazonaws.com/python:latest&quot;
+            sh &quot;docker tag python:built aaaaaaaaaaaaa.dkr.ecr.<region>.amazonaws.com/python:latest&quot;
+            sh &quot;docker push aaaaaaaaaaaaa.dkr.ecr.<region>.amazonaws.com/python:latest&quot;
             sh &quot;sed -i &apos;s/bbbbbbbbbbbbbb/aaaaaaaaaaaaa/g&apos; /var/lib/jenkins/workspace/initial-deploy/kubernetes/python.yml&quot;
+            sh &quot;sed -i &apos;s/_region_/<region>/g&apos; /var/lib/jenkins/workspace/initial-deploy/kubernetes/python.yml&quot;
         }
     }
 
@@ -50,15 +51,15 @@
 
     stage(&apos;login to aws registry&apos;) {
         dir(&quot;/var/lib/jenkins/workspace/initial-deploy/kubernetes&quot;) {
-            sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx &apos;aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin aaaaaaaaaaaaa.dkr.ecr.us-east-1.amazonaws.com&apos;&quot;
-            sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@yyy.yyy.yyy.yyy &apos;aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin aaaaaaaaaaaaa.dkr.ecr.us-east-1.amazonaws.com&apos;&quot;
+            sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx &apos;aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin aaaaaaaaaaaaa.dkr.ecr.<region>.amazonaws.com&apos;&quot;
+            sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@yyy.yyy.yyy.yyy &apos;aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin aaaaaaaaaaaaa.dkr.ecr.<region>.amazonaws.com&apos;&quot;
         }
     }
 
     stage(&apos;Build python&apos;) {
         dir(&quot;/var/lib/jenkins/workspace/initial-deploy/kubernetes&quot;) {
             sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx &apos;kubectl delete secret regcred --ignore-not-found&apos;&quot;
-            sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx &apos;kubectl create secret docker-registry regcred --docker-server=aaaaaaaaaaaaa.dkr.ecr.us-east-1.amazonaws.com --docker-username=AWS --docker-password=\$(aws ecr get-login-password --region us-east-1)&apos;&quot;
+            sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx &apos;kubectl create secret docker-registry regcred --docker-server=aaaaaaaaaaaaa.dkr.ecr.<region>.amazonaws.com --docker-username=AWS --docker-password=\$(aws ecr get-login-password --region <region>)&apos;&quot;
             sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx &apos;kubectl apply -f /python.yml&apos;&quot;
             sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx &apos;kubectl rollout restart deployments python&apos;&quot;
         }

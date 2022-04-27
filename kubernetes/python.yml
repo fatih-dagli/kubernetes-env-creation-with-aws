@@ -14,7 +14,7 @@ spec:
         app: python
     spec:
       containers:
-        - image: bbbbbbbbbbbbbb.dkr.ecr.us-east-1.amazonaws.com/python:latest
+        - image: bbbbbbbbbbbbbb.dkr.ecr._region_.amazonaws.com/python:latest
           imagePullPolicy: Always
           name: python
           env:

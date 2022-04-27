@@ -21,6 +21,9 @@
     - name: change aws_account_id in jenkins job
       shell: sed -i "s/aaaaaaaaaaaaa/{{ aws_account_id }}/g" {{ project_path }}/ansible/config.xml
 
+    - name: change aws_account_id in jenkins job
+      shell: sed -i "s/<region>/{{ aws_region }}/g" {{ project_path }}/ansible/config.xml
+
     - name: ensure the jenkins apt repository key is installed
       apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
       become: yes

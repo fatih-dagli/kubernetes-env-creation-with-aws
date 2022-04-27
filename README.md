@@ -51,26 +51,27 @@ I used the AWS Cloud Environment for this scenario. You can follow below steps t
       https://github.com/fatih-dagli/kubernetes-env-creation-with-aws/blob/main/images/terraform_installation.md
       
 9. Go any folder in machine and clone this repository.
-```
-git clone https://github.com/fatih-dagli/kubernetes-env-creation-with-aws.git
-```
- 
+      ```
+      git clone https://github.com/fatih-dagli/kubernetes-env-creation-with-aws.git
+      ```
+
 10. You should configure your personal informations and path in 
 
-- terraform/variable.tf (Change AWS account information)
-- ansible/project.yml   (Change project paths)
-- ansbile/hosts         (Change IP address with your machine IP address)
- 
-  
+      - terraform/variable.tf (Change AWS account information)
+      - ansible/project.yml   (Change project paths)
+      - ansbile/hosts         (Change IP address with your machine IP address)
+      
+      
    
-   
+
 
 
 # Installation Steps
  
 Now you are ready to execute below two command to install your kubernetes cluster !
 
-Second command will ask your AWS access, secret key and AWS account id.  you should enter these parameters.
+
+Second command will ask your AWS access, secret key, AWS region and AWS account id.  you should enter these parameters.
 
 ```
 ansible-playbook --tags install-terraform project.yml -k
