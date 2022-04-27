@@ -35,15 +35,15 @@
 
     stage(&apos;set aws_access_key_id&apos;) {
         dir(&quot;/var/lib/jenkins/workspace/initial-deploy/kubernetes&quot;) {
-            sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx &apos;aws configure set aws_access_key_id AKIAYB5PTDSDCC35M3V6&apos;&quot;
-            sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@yyy.yyy.yyy.yyy &apos;aws configure set aws_access_key_id AKIAYB5PTDSDCC35M3V6&apos;&quot;
+            sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx &apos;aws configure set aws_access_key_id xxxxxxxxxxxxxxxxxxxxxxxxxxxxx&apos;&quot;
+            sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@yyy.yyy.yyy.yyy &apos;aws configure set aws_access_key_id xxxxxxxxxxxxxxxxxxxxxxxxxxxxx&apos;&quot;
         }
     }
 
     stage(&apos;set aws_secret_access_key&apos;) {
         dir(&quot;/var/lib/jenkins/workspace/initial-deploy/kubernetes&quot;) {
-            sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx &apos;aws configure set aws_secret_access_key NnGo6leNdzoN/LYG6c39itTBAuDF0+750dAvqtql&apos;&quot;
-            sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@yyy.yyy.yyy.yyy &apos;aws configure set aws_secret_access_key NnGo6leNdzoN/LYG6c39itTBAuDF0+750dAvqtql&apos;&quot;
+            sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx &apos;aws configure set aws_secret_access_key xxxxxxxxxxxxxxxxxxxxxxxxxxxxx&apos;&quot;
+            sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@yyy.yyy.yyy.yyy &apos;aws configure set aws_secret_access_key xxxxxxxxxxxxxxxxxxxxxxxxxxxxx&apos;&quot;
         }
     }
 
