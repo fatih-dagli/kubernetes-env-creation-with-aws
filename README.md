@@ -68,10 +68,12 @@ I used the AWS Cloud Environment for this scenario. You can follow below steps t
 
 # Installation Steps
  
-Now you are ready to execute below two command to install your kubernetes cluster !
+Now you are ready to execute below two commands to install your kubernetes cluster !
 
 
-Second command will ask your AWS access, secret key, AWS region and AWS account id.  you should enter these parameters.
+Second command will ask your AWS access, secret key, AWS region and AWS account id.  You should enter these parameters. 
+
+Execute below commands in **kubernetes-env-creation-with-aws/ansible** folder
 
 ```
 ansible-playbook --tags install-terraform project.yml -k
