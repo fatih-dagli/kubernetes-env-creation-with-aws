@@ -59,6 +59,7 @@
             sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx &apos;kubectl delete secret regcred --ignore-not-found&apos;&quot;
             sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx &apos;kubectl create secret docker-registry regcred --docker-server=553882164358.dkr.ecr.us-east-1.amazonaws.com --docker-username=AWS --docker-password=\$(aws ecr get-login-password --region us-east-1)&apos;&quot;
             sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx &apos;kubectl apply -f /python.yml&apos;&quot;
+            sh &quot;sshpass -p &apos;Operation123&apos; ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx &apos;kubectl rollout restart deployments python&apos;&quot;
         }
     }
 }</script>

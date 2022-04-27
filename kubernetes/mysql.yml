@@ -70,3 +70,4 @@ spec:
   selector:
     app: mysql
   type: ClusterIP
+  clusterIP: 10.108.183.84

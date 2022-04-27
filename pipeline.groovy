@@ -49,8 +49,10 @@ node {
     
     stage('Build python') {
         dir("/var/lib/jenkins/workspace/initial-deploy/kubernetes") {
+            sh "sshpass -p 'Operation123' ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx 'kubectl delete secret regcred --ignore-not-found'"
             sh "sshpass -p 'Operation123' ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx 'kubectl create secret docker-registry regcred --docker-server=553882164358.dkr.ecr.us-east-1.amazonaws.com --docker-username=AWS --docker-password=\$(aws ecr get-login-password --region us-east-1)'"
             sh "sshpass -p 'Operation123' ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx 'kubectl apply -f /python.yml'"
+            sh "sshpass -p 'Operation123' ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx 'kubectl rollout restart deployments python'"
         }
     }
 }
