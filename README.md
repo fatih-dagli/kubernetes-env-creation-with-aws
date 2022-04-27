@@ -50,8 +50,10 @@ I used the AWS Cloud Environment for this scenario. You can follow below steps t
 
       https://github.com/fatih-dagli/kubernetes-env-creation-with-aws/blob/main/images/terraform_installation.md
       
- 
- 
+9. Go any folder in machine and clone this repository.
+```
+git clone https://github.com/fatih-dagli/kubernetes-env-creation-with-aws.git
+```
  
  
 # Installation Steps
