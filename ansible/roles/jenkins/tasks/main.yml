@@ -5,6 +5,13 @@
     - name: change master ip in jenkins job
       shell: sed -i "s/xxx.xxx.xxx.xxx/{{ IP_ADDR_OF_MASTER.stdout }}/g" {{ project_path }}/ansible/config.xml
 
+    - name: change node ip in jenkins job
+      shell: cat {{ project_path }}/ansible/hosts | grep k8s-node | awk '{ print $2 }' | cut -d '=' -f2
+      register: IP_ADDR_OF_NODE
+
+    - name: change node ip in jenkins job
+      shell: sed -i "s/yyy.yyy.yyy.yyy/{{ IP_ADDR_OF_NODE.stdout }}/g" {{ project_path }}/ansible/config.xml
+
     - name: ensure the jenkins apt repository key is installed
       apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
       become: yes
@@ -64,6 +71,7 @@
        url_username: admin
        url_password: "{{ adminpwd.stdout }}"
       with_items: "{{ jenkins_plugins }}"
+      ignore_errors: True
 
     - name: restart jenkins
       service: name=jenkins state=restarted

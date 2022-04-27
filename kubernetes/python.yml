@@ -1,72 +1,49 @@
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: mysql-pv
-  labels:
-    type: local
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 5Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/opt/data"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql-pv-claim
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: python
 spec:
   selector:
     matchLabels:
-      app: mysql
+      app: python
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: mysql
+        app: python
     spec:
       containers:
-        - image: mysql:8.0
-          name: mysql
+        - image: 553882164358.dkr.ecr.us-east-1.amazonaws.com/python:latest
+          imagePullPolicy: Always
+          name: python
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: password
           ports:
-            - containerPort: 3306
-              name: mysql
-          volumeMounts:
-            - name: mysql-persistent-storage
-              mountPath: /var/lib/mysql
-      volumes:
-        - name: mysql-persistent-storage
-          persistentVolumeClaim:
-            claimName: mysql-pv-claim
+            - containerPort: 3000
+              name: python
+      imagePullSecrets:
+          - name: regcred
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql
+  name: python
 spec:
+  externalTrafficPolicy: Cluster
   ports:
-    - name: mysql-port
-      protocol: TCP
-      port: 3306
-      targetPort: 3306
+  - name: roma-nginx-service-7000
+    nodePort: 32700
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
   selector:
-    app: mysql
-  type: ClusterIP
+    app: python
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  type: NodePort
+status:
+  loadBalancer: {}

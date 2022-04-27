@@ -104,8 +104,6 @@
         enable: yes
       github-organization-folder:
         enable: yes
-      golang:
-        enable: yes
       gradle:
         enable: yes
       greenballs:
@@ -156,10 +154,6 @@
         enable: yes
       publish-over-ssh:
         enable: yes
-      resource-disposer:
-        enable: yes
-      robot:
-        enable: yes
       scm-api:
         enable: yes
       scm-sync-configuration:
@@ -207,8 +201,6 @@
       ws-cleanup:
         enable: yes
       xvfb:
-        enable: yes
-      zentimestamp:
         enable: yes
   tags: install-jenkins
   tasks:

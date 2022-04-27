@@ -63,6 +63,11 @@
      name: net-tools
      state: present
  
+ - name: install awscli
+   apt:
+     name: awscli
+     state: present
+
  - name: Hold kubeadm
    dpkg_selections:
      name: kubeadm
