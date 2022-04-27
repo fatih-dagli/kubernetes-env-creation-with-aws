@@ -93,6 +93,16 @@ resource "null_resource" "local-command-2" {
   }
 }
 
+resource "null_resource" "local-command-3" {
+  triggers = {
+    cluster_instance_ids = "${join(",", aws_instance.myClusterInstance.*.id)}"
+  }
+
+  provisioner "local-exec" {
+    command = "echo 'You can connect to application using this URL: https://${aws_instance.myClusterInstance.0.public_ip}:32700' >> /tmp/publicip "
+  }
+}
+
 resource "null_resource" "remote-command-1" {
   count           = var.instance_count
 

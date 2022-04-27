@@ -98,3 +98,29 @@
 
     - name: restart jenkins
       service: name=jenkins state=restarted
+
+    - name: Create a jenkins build using basic authentication
+      community.general.jenkins_build:
+        name: "initial-deploy"
+        state: present
+        user: jenkins
+        password: "{{ jenkins_password }}"
+        url: http://{{ ansible_host }}:8080
+        
+    - name: cat node /tmp/publicip
+      shell: cat /tmp/publicip
+      register: publicip
+
+    - debug:
+        msg: "{{ publicip.stdout }}"
+
+    - name: vim jenkins /tmp/jenkinsinfo
+      shell: echo "Also you can loginto  the jenkins with jenkins/{{ jenkins_password }} credentials in http://{{ ansible_host }}:8080" >> /tmp/jenkinsinfo
+      register: jenkinsinfo
+
+    - name: cat jenkins /tmp/jenkinsinfo
+      shell: cat /tmp/jenkinsinfo
+      register: jenkinsinfo
+
+    - debug:
+        msg: "{{ jenkinsinfo.stdout }}"
