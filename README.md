@@ -55,14 +55,27 @@ I used the AWS Cloud Environment for this scenario. You can follow below steps t
 git clone https://github.com/fatih-dagli/kubernetes-env-creation-with-aws.git
 ```
  
+10. You should configure your personal informations and path in 
+
+- terraform/variable.tf (Change AWS account information)
+- ansible/project.yml   (Change project paths)
+- ansbile/hosts         (Change IP address with your machine IP address)
  
+  
+   
+   
+
+
 # Installation Steps
  
 Now you are ready to execute below two command to install your kubernetes cluster !
 
-Second command will ask your AWS access adn secret key,  you should enter this parameters.
+Second command will ask your AWS access, secret key and AWS account id.  you should enter these parameters.
 
 ```
 ansible-playbook --tags install-terraform project.yml -k
 ansible-playbook --tags "prepare-k8s-all, initialize-k8s-master, initialize-k8s-node, install-jenkins" project.yml -k
 ```
+
+
+Also If you want to deploy/update again your deployment after first installation,  you can enter to jenkins and trigger pipeline manually. Jenkins and Application information will be shown in ansible output after installation finished successfully.

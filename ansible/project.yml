@@ -44,6 +44,8 @@
       prompt: Enter your aws_access_key_id
     - name: aws_secret_access_key
       prompt: Enter your aws_secret_access_key
+    - name: aws_account_id
+      prompt: Enter your aws_account_id
   vars:
     jenkins_password: "Operation123"
     project_path: "/home/ubuntu/kubernetes-env-creation-with-aws"
