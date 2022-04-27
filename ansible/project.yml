@@ -3,7 +3,7 @@
   hosts: terraform
   tags: install-terraform
   vars:
-    project_path: "/home/ubuntu/terraform-files/"
+    project_path: "/home/ubuntu/kubernetes-env-creation-with-aws/terraform-files/"
   tasks:
   - import_role:
       name: terraform
@@ -13,7 +13,7 @@
   hosts: k8s-all
   tags: prepare-k8s-all
   vars:
-    daemon_json_path: "/home/ubuntu/ansible/daemon.json"
+    daemon_json_path: "/home/ubuntu/kubernetes-env-creation-with-aws/ansible/daemon.json"
   tasks:
   - import_role:
       name: k8s_init
@@ -23,7 +23,7 @@
   hosts: k8s-master
   tags: initialize-k8s-master
   vars:
-    project_path: "/home/ubuntu"
+    project_path: "/home/ubuntu/kubernetes-env-creation-with-aws"
   tasks:
   - import_role:
       name: k8s_master
@@ -46,7 +46,7 @@
       prompt: Enter your aws_secret_access_key
   vars:
     jenkins_password: "Operation123"
-    project_path: "/home/ubuntu"
+    project_path: "/home/ubuntu/kubernetes-env-creation-with-aws"
     jenkins_plugins:
       git:
         enabled: yes

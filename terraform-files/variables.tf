@@ -43,5 +43,5 @@ variable "instance_count" {
 }
 
 variable "project_path" {
-     default = "/home/ubuntu"
+     default = "/home/ubuntu/kubernetes-env-creation-with-aws"
 }
