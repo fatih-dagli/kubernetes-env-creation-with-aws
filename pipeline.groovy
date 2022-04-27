@@ -35,8 +35,8 @@ node {
 
     stage('set aws_secret_access_key') {
         dir("/var/lib/jenkins/workspace/initial-deploy/kubernetes") {
-            sh "sshpass -p 'Operation123' ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx 'aws configure set aws_secret_access_key xxxxxxxxxxxxxxxxxxxxxxxxxx'"
-            sh "sshpass -p 'Operation123' ssh -o StrictHostKeyChecking=no root@yyy.yyy.yyy.yyy 'aws configure set aws_secret_access_key xxxxxxxxxxxxxxxxxxxxxxxxxx'"
+            sh "sshpass -p 'Operation123' ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx 'aws configure set aws_secret_access_key yyyyyyyyyyyyyyyyyyyyyyyyyyyyy'"
+            sh "sshpass -p 'Operation123' ssh -o StrictHostKeyChecking=no root@yyy.yyy.yyy.yyy 'aws configure set aws_secret_access_key yyyyyyyyyyyyyyyyyyyyyyyyyyyyy'"
         }
     }
 

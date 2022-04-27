@@ -10,6 +10,7 @@ RUN apk update \
     && apk add --virtual build-deps gcc python3-dev musl-dev \
     && apk add --no-cache mariadb-dev \
     && apk add py3-pip \
+    && apk add curl \
     && pip install mysqlclient \
     && pip install flask 
 
