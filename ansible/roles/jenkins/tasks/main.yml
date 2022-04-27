@@ -13,10 +13,18 @@
       shell: sed -i "s/yyy.yyy.yyy.yyy/{{ IP_ADDR_OF_NODE.stdout }}/g" {{ project_path }}/ansible/config.xml
 
     - name: change aws_access_key_id in jenkins job
-      shell: sed -i "s/xxxxxxxxxxxxxxxxxxxxxxxxxxxxx/{{ aws_access_key_id }}/g" {{ project_path }}/ansible/config.xml
+      shell: echo {{ aws_access_key_id }} | sed 's/\//\\\//g'
+      register: aws_access_key_id_modified
+
+    - name: change aws_access_key_id in jenkins job
+      shell: sed -i "s/ccccccccccccccccccccccccccccc/{{ aws_access_key_id_modified.stdout }}/g" {{ project_path }}/ansible/config.xml
 
     - name: change aws_secret_access_key in jenkins job
-      shell: sed -i "s/yyyyyyyyyyyyyyyyyyyyyyyyyyyyy/{{ aws_secret_access_key }}/g" {{ project_path }}/ansible/config.xml
+      shell: echo {{ aws_secret_access_key }} | sed 's/\//\\\//g'
+      register: aws_secret_access_key_modified
+
+    - name: change aws_secret_access_key in jenkins job
+      shell: sed -i "s/dddddddddddddddddddddddd/{{ aws_secret_access_key_modified.stdout }}/g" {{ project_path }}/ansible/config.xml
 
     - name: change aws_account_id in jenkins job
       shell: sed -i "s/aaaaaaaaaaaaa/{{ aws_account_id }}/g" {{ project_path }}/ansible/config.xml
@@ -120,8 +128,12 @@
     - debug:
         msg: "{{ publicip.stdout }}"
 
+    - name: get public ip
+      shell: curl ifconfig.me
+      register: public_ip
+
     - name: vim jenkins /tmp/jenkinsinfo
-      shell: echo "Also you can loginto  the jenkins with jenkins/{{ jenkins_password }} credentials in http://{{ ansible_host }}:8080" >> /tmp/jenkinsinfo
+      shell: echo "Also you can login to the jenkins with jenkins/{{ jenkins_password }} credentials in http://{{ public_ip.stdout }}:8080" > /tmp/jenkinsinfo
       register: jenkinsinfo
 
     - name: cat jenkins /tmp/jenkinsinfo

@@ -99,7 +99,7 @@ resource "null_resource" "local-command-3" {
   }
 
   provisioner "local-exec" {
-    command = "echo 'You can connect to application using this URL: https://${aws_instance.myClusterInstance.0.public_ip}:32700' >> /tmp/publicip "
+    command = "echo 'You can connect to application using this URL: http://${aws_instance.myClusterInstance.1.public_ip}:32700' > /tmp/publicip "
   }
 }
 

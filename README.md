@@ -57,9 +57,9 @@ I used the AWS Cloud Environment for this scenario. You can follow below steps t
 
 10. You should configure your personal informations and path in 
 
-      - terraform/variable.tf (Change AWS account information)
-      - ansible/project.yml   (Change project paths)
-      - ansbile/hosts         (Change IP address with your machine IP address)
+      - kubernetes-env-creation-with-aws/terraform/variable.tf (Change AWS account information)
+      - kubernetes-env-creation-with-aws/ansible/project.yml   (Change project paths)
+      - kubernetes-env-creation-with-aws/ansbile/hosts         (Change IP address with your machine IP address)
       
       
    
@@ -73,7 +73,7 @@ Now you are ready to execute below two commands to install your kubernetes clust
 
 Second command will ask your AWS access, secret key, AWS region and AWS account id.  You should enter these parameters. 
 
-Execute below commands in **kubernetes-env-creation-with-aws/ansible** folder
+Execute below commands in **kubernetes-env-creation-with-aws/ansible** folder and enter password of root user.
 
 ```
 ansible-playbook --tags install-terraform project.yml -k

@@ -30,15 +30,15 @@ node {
 
     stage('set aws_access_key_id') {
         dir("/var/lib/jenkins/workspace/initial-deploy/kubernetes") {
-            sh "sshpass -p 'Operation123' ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx 'aws configure set aws_access_key_id xxxxxxxxxxxxxxxxxxxxxxxxxxxxx'"
-            sh "sshpass -p 'Operation123' ssh -o StrictHostKeyChecking=no root@yyy.yyy.yyy.yyy 'aws configure set aws_access_key_id xxxxxxxxxxxxxxxxxxxxxxxxxxxxx'"
+            sh "sshpass -p 'Operation123' ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx 'aws configure set aws_access_key_id ccccccccccccccccccccccccccccc'"
+            sh "sshpass -p 'Operation123' ssh -o StrictHostKeyChecking=no root@yyy.yyy.yyy.yyy 'aws configure set aws_access_key_id ccccccccccccccccccccccccccccc'"
         }
     }
 
     stage('set aws_secret_access_key') {
         dir("/var/lib/jenkins/workspace/initial-deploy/kubernetes") {
-            sh "sshpass -p 'Operation123' ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx 'aws configure set aws_secret_access_key yyyyyyyyyyyyyyyyyyyyyyyyyyyyy'"
-            sh "sshpass -p 'Operation123' ssh -o StrictHostKeyChecking=no root@yyy.yyy.yyy.yyy 'aws configure set aws_secret_access_key yyyyyyyyyyyyyyyyyyyyyyyyyyyyy'"
+            sh "sshpass -p 'Operation123' ssh -o StrictHostKeyChecking=no root@xxx.xxx.xxx.xxx 'aws configure set aws_secret_access_key dddddddddddddddddddddddd'"
+            sh "sshpass -p 'Operation123' ssh -o StrictHostKeyChecking=no root@yyy.yyy.yyy.yyy 'aws configure set aws_secret_access_key dddddddddddddddddddddddd'"
         }
     }
 
